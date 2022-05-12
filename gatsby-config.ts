@@ -1,6 +1,6 @@
 import { GatsbyConfig } from "gatsby"
-import colors from 'tailwindcss/colors'
-import FMK from './FrontmatterKitchen.config'
+import colors from "tailwindcss/colors"
+import FMK from "./FrontmatterKitchen.config"
 
 const config: GatsbyConfig = {
 	siteMetadata: {
@@ -12,31 +12,40 @@ const config: GatsbyConfig = {
 		siteUrl: FMK.siteUrl,
 	},
 	plugins: [
-		(!FMK.analytics.disableAll && FMK.analytics.services.google.tagManagerGlobalId) ? {
-			resolve: "gatsby-plugin-google-tagmanager",
-			options: {
-				id: FMK.analytics.services.google.tagManagerGlobalId,
-				includeInDevelopment: false,
-				defaultDataLayer: { platform: "gatsby" },
-				enableWebVitalsTracking: true,
-			}
-		} : null,
+		!FMK.analytics.disableAll &&
+		FMK.analytics.services.google.tagManagerGlobalId
+			? {
+					resolve: "gatsby-plugin-google-tagmanager",
+					options: {
+						id: FMK.analytics.services.google.tagManagerGlobalId,
+						includeInDevelopment: false,
+						defaultDataLayer: { platform: "gatsby" },
+						enableWebVitalsTracking: true,
+					},
+			  }
+			: null,
 
+		!FMK.analytics.disableAll &&
+		FMK.analytics.services.google.universalTrackingId
+			? {
+					resolve: "gatsby-plugin-google-analytics",
+					options: {
+						trackingId:
+							FMK.analytics.services.google.universalTrackingId,
+					},
+			  }
+			: null,
 
-		(!FMK.analytics.disableAll && FMK.analytics.services.google.universalTrackingId) ? {
-			resolve: "gatsby-plugin-google-analytics",
-			options: {
-				trackingId: FMK.analytics.services.google.universalTrackingId,
-			},
-		} : null,
-
-		(!FMK.advertising.disableAll && FMK.advertising.services.adsense.clientId) ? {
-			resolve: `gatsby-plugin-google-adsense`,
-			options: {
-				googleAdClientId: FMK.advertising.services.adsense.clientId,
-				head: true,
-			},
-		} : null,
+		!FMK.advertising.disableAll && FMK.advertising.services.adsense.clientId
+			? {
+					resolve: `gatsby-plugin-google-adsense`,
+					options: {
+						googleAdClientId:
+							FMK.advertising.services.adsense.clientId,
+						head: true,
+					},
+			  }
+			: null,
 
 		{
 			resolve: `gatsby-source-filesystem`,
@@ -71,7 +80,7 @@ const config: GatsbyConfig = {
 		{
 			resolve: `gatsby-plugin-mdx`,
 			options: {
-			  extensions: [`.mdx`, `.md`],
+				extensions: [`.mdx`, `.md`],
 			},
 		},
 		`gatsby-transformer-sharp`,
@@ -81,21 +90,25 @@ const config: GatsbyConfig = {
 		`gatsby-plugin-styled-components`,
 
 		// JamComments.com
-		 FMK.commentSystem === "jamcomments" ? {
-			resolve: '@jam-comments/gatsby',
-			options: {
-			  api_key: process.env.JAM_COMMENTS_API_KEY,
-			  domain: process.env.JAM_COMMENTS_DOMAIN
-			}
-		} : null,
+		FMK.commentSystem === "jamcomments"
+			? {
+					resolve: "@jam-comments/gatsby",
+					options: {
+						api_key: process.env.JAM_COMMENTS_API_KEY,
+						domain: process.env.JAM_COMMENTS_DOMAIN,
+					},
+			  }
+			: null,
 
 		// Disqus Comments
-		FMK.commentSystem === "disqus" ? {
-			resolve: `gatsby-plugin-disqus`,
-			options: {
-				shortname: `example`,
-			},
-		} : null,
+		FMK.commentSystem === "disqus"
+			? {
+					resolve: `gatsby-plugin-disqus`,
+					options: {
+						shortname: `example`,
+					},
+			  }
+			: null,
 
 		`gatsby-plugin-react-helmet`,
 		`gatsby-plugin-advanced-sitemap`,

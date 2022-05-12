@@ -4,5 +4,5 @@ A Gatsby.js v4.x.x starter site designed with sensible defaults to get started q
 
 ## Usage
 
-1. Install dependencies using `npm install` or  `yarn`
+1. Install dependencies using `npm install` or `yarn`
 2. Open the `FrontmatterKitchen.config.ts` file to configure some details about the site.

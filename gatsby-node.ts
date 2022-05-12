@@ -73,72 +73,70 @@ export const createPages: GatsbyNode["createPages"] = async ({
 		statusCode: 200,
 	})
 
-	// const { errors, data } = await graphql(`
-	// query {
-	// 	posts: allMarkdownRemark(
-	// 	  sort: { fields: [frontmatter___date], order: DESC }
-	// 	  filter: { fields: { collection: { eq: "blog" }, frontmatter___draft: { eq: false } } }
-	// 	) {
-	// 	  edges {
-	// 		node {
-	// 		  id
-	// 		  fields {
-	// 			slug
-	// 		  }
-	// 		  frontmatter {
-	// 			title
-	// 			slug
-	// 			date
-	// 		  }
-	// 		  excerpt(pruneLength: 280)
-	// 		}
-	// 	  }
-	// 	}
-	//   }
-	// `)
+	const { errors, data } = await graphql(`
+		{
+			posts: allMarkdownRemark(
+				filter: {
+					fields: { collection: { eq: "blog" } }
+					frontmatter: { draft: { eq: false } }
+				}
+				sort: { fields: frontmatter___date, order: DESC }
+			) {
+				edges {
+					node {
+						id
+						frontmatter {
+							date
+							slug
+						}
+					}
+				}
+			}
+		}
+	`)
 
-	// if (errors) {
-	// 	reporter.panicOnBuild(`Error while running GraphQL query.`)
-	// 	return
-	// }
+	if (errors) {
+		reporter.panicOnBuild(`Error while running GraphQL query.`)
+		return
+	}
 
-	// if (data) {
-	// 	const posts = data.posts.edges.map((edge) => edge.node)
+	if (data) {
+		const posts = data.posts.edges.map((edge) => edge.node)
 
-	// 	// Create blog-list pages
-	// 	const postsPerPage = 6
-	// 	const numPages = Math.ceil(posts.length / postsPerPage)
-	// 	Array.from({ length: numPages }).forEach((_, i) => {
-	// 		createPage({
-	// 			path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-	// 			component: path.resolve(
-	// 				"./src/templates/blog-list-template.tsx"
-	// 			),
-	// 			context: {
-	// 				limit: postsPerPage,
-	// 				skip: i * postsPerPage,
-	// 				numPages,
-	// 				currentPage: i + 1,
-	// 				totalPosts: posts.length,
-	// 			},
-	// 		})
-	// 	})
+		// Create blog-list pages
+		const postsPerPage = 6
+		const numPages = Math.ceil(posts.length / postsPerPage)
+		Array.from({ length: numPages }).forEach((_, i) => {
+			createPage({
+				path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+				component: path.resolve(
+					"./src/templates/blog-list-template.tsx"
+				),
+				context: {
+					limit: postsPerPage,
+					skip: i * postsPerPage,
+					numPages,
+					currentPage: i + 1,
+					totalPosts: posts.length,
+				},
+			})
+		})
 
-	// 	// Creste post pages
-	// 	const postTemplate = path.resolve(
-	// 		"./src/templates/blog-post-template.tsx"
-	// 	)
-	// 	posts.forEach((post) => {
-	// 		const path = `/blog/${post.frontmatter.slug}`
+		// Creste post pages
+		const postTemplate = path.resolve(
+			"./src/templates/blog-post-template.tsx"
+		)
+		posts.forEach((post) => {
+			const path = `/blog/${post.frontmatter.slug}`
 
-	// 		createPage({
-	// 			path,
-	// 			component: postTemplate,
-	// 			context: {
-	// 				id: post.id,
-	// 				pagePath: path,
-	// 			},
-	// 		})
-	// 	})
-	// }
+			createPage({
+				path,
+				component: postTemplate,
+				context: {
+					id: post.id,
+					pagePath: path,
+				},
+			})
+		})
+	}
 }

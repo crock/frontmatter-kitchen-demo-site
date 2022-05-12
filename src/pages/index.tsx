@@ -1,3 +1,4 @@
+import { Link } from "gatsby"
 import React from "react"
 import { Wrapper } from "../components/core"
 import Seo from "../components/Seo"
@@ -25,14 +26,28 @@ const IndexPage = () => {
 					<code>gatsby-starter-frontmatter-kitchen</code> is a Gatsby
 					4.x.x starter site for a markdown-sourced niche blog.
 				</p>
-				<h3 className="font-black font-xl mt-4 mb-2 uppercase">Features:</h3>
+				<h3 className="font-black font-xl mt-4 mb-2 uppercase">
+					Features:
+				</h3>
 				<ul className="list-disc list-inside">
 					{features.map((feature) => (
 						<li key={feature}>{feature}</li>
 					))}
 				</ul>
 				<nav className="my-4 flex flex-row flex-nowrap justify-start items-center">
-					<a className="underline font-semibold text-primary hover:text-primary-light" target={`_blank`} href="https://github.com/crock/gatsby-starter-frontmatter-kitchen">GitHub</a>
+					<a
+						className="underline font-semibold text-primary hover:text-primary-light py-1 px-2"
+						target={`_blank`}
+						href="https://github.com/crock/gatsby-starter-frontmatter-kitchen"
+					>
+						GitHub
+					</a>
+					<Link
+						className="underline font-semibold text-primary hover:text-primary-light py-1 px-2"
+						to="/blog"
+					>
+						Blog
+					</Link>
 				</nav>
 			</div>
 		</Wrapper>

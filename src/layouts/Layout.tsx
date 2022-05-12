@@ -21,9 +21,7 @@ const GlobalStyles = createGlobalStyle`
 const Layout = ({ children }: ILayout) => {
 	return (
 		<>
-			<main>
-        {children}
-      </main>
+			<main>{children}</main>
 			<GlobalStyles />
 		</>
 	)
