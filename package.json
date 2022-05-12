@@ -1,11 +1,10 @@
 {
-  "name": "gatsby-starter-frontmatter-kitchen",
-  "license": "MIT",
+  "name": "frontmatter-kitchen-demo-site",
   "author": {
     "name": "Alex Crocker",
     "email": "alex@croc.io"
   },
-  "private": false,
+  "private": true,
   "scripts": {
     "build": "gatsby build",
     "start": "gatsby develop",

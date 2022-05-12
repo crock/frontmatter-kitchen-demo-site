@@ -4,12 +4,12 @@ const config: IFrontmatterKitchenConfig = {
     siteUrl: "https://frontmatter.kitchen",
     commentSystem: false, // disqus, jamcomments, or false to disable
     analytics: {
-        disableAll: true,
+        disableAll: false,
         services: {
             google: {
                 disabled: false,
-                universalTrackingId: "",
-                tagManagerGlobalId: ""
+                universalTrackingId: "UA-90621507-11",
+                tagManagerGlobalId: "G-WEBBB67VPN"
             },
             splitbee: {
                 disabled: false,
@@ -17,10 +17,10 @@ const config: IFrontmatterKitchenConfig = {
         }
     },
     advertising: {
-        disableAll: true,
+        disableAll: false,
         services: {
             adsense: {
-                clientId: ""
+                clientId: "ca-pub-3627563344348929"
             }
         }
     }
