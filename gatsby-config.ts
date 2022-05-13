@@ -13,38 +13,38 @@ const config: GatsbyConfig = {
 	},
 	plugins: [
 		!FMK.analytics.disableAll &&
-		FMK.analytics.services.google.tagManagerGlobalId
+			FMK.analytics.services.google.tagManagerGlobalId
 			? {
-					resolve: "gatsby-plugin-google-tagmanager",
-					options: {
-						id: FMK.analytics.services.google.tagManagerGlobalId,
-						includeInDevelopment: false,
-						defaultDataLayer: { platform: "gatsby" },
-						enableWebVitalsTracking: true,
-					},
-			  }
+				resolve: "gatsby-plugin-google-tagmanager",
+				options: {
+					id: FMK.analytics.services.google.tagManagerGlobalId,
+					includeInDevelopment: false,
+					defaultDataLayer: { platform: "gatsby" },
+					enableWebVitalsTracking: true,
+				},
+			}
 			: null,
 
 		!FMK.analytics.disableAll &&
-		FMK.analytics.services.google.universalTrackingId
+			FMK.analytics.services.google.universalTrackingId
 			? {
-					resolve: "gatsby-plugin-google-analytics",
-					options: {
-						trackingId:
-							FMK.analytics.services.google.universalTrackingId,
-					},
-			  }
+				resolve: "gatsby-plugin-google-analytics",
+				options: {
+					trackingId:
+						FMK.analytics.services.google.universalTrackingId,
+				},
+			}
 			: null,
 
 		!FMK.advertising.disableAll && FMK.advertising.services.adsense.clientId
 			? {
-					resolve: `gatsby-plugin-google-adsense`,
-					options: {
-						googleAdClientId:
-							FMK.advertising.services.adsense.clientId,
-						head: true,
-					},
-			  }
+				resolve: `gatsby-plugin-google-adsense`,
+				options: {
+					googleAdClientId:
+						FMK.advertising.services.adsense.clientId,
+					head: true,
+				},
+			}
 			: null,
 
 		{
@@ -75,6 +75,13 @@ const config: GatsbyConfig = {
 				name: `images`,
 			},
 		},
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				path: `${__dirname}/static`,
+				name: `images`,
+			},
+		},
 		`gatsby-plugin-image`,
 		"gatsby-plugin-sharp",
 		{
@@ -84,7 +91,25 @@ const config: GatsbyConfig = {
 			},
 		},
 		`gatsby-transformer-sharp`,
-		`gatsby-transformer-remark`,
+		{
+			resolve: `gatsby-transformer-remark`,
+			options: {
+				plugins: [
+					`gatsby-remark-copy-linked-files`,
+					{
+						resolve: `gatsby-remark-images`,
+						options: {
+							maxWidth: 1200,
+							backgroundColor: "transparent",
+							disableBgImageOnAlpha: true,
+							withWebp: true,
+							linkImagesToOriginal: false,
+							quality: 70,
+						},
+					},
+				],
+			},
+		},
 		`gatsby-transformer-json`,
 		`gatsby-plugin-postcss`,
 		`gatsby-plugin-styled-components`,
@@ -92,22 +117,22 @@ const config: GatsbyConfig = {
 		// JamComments.com
 		FMK.commentSystem === "jamcomments"
 			? {
-					resolve: "@jam-comments/gatsby",
-					options: {
-						api_key: process.env.JAM_COMMENTS_API_KEY,
-						domain: process.env.JAM_COMMENTS_DOMAIN,
-					},
-			  }
+				resolve: "@jam-comments/gatsby",
+				options: {
+					api_key: process.env.JAM_COMMENTS_API_KEY,
+					domain: process.env.JAM_COMMENTS_DOMAIN,
+				},
+			}
 			: null,
 
 		// Disqus Comments
 		FMK.commentSystem === "disqus"
 			? {
-					resolve: `gatsby-plugin-disqus`,
-					options: {
-						shortname: `example`,
-					},
-			  }
+				resolve: `gatsby-plugin-disqus`,
+				options: {
+					shortname: `example`,
+				},
+			}
 			: null,
 
 		`gatsby-plugin-react-helmet`,

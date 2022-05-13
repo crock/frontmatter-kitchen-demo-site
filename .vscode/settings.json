@@ -1,4 +1,5 @@
 {
 	"frontMatter.content.autoUpdateDate": true,
-	"frontMatter.preview.host": "http://localhost:8000"
+	"frontMatter.preview.host": "http://localhost:8000",
+	"frontMatter.content.publicFolder": "static"
 }

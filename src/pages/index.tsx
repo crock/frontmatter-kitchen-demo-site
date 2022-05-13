@@ -1,6 +1,4 @@
-import { Link } from "gatsby"
 import React from "react"
-import { Wrapper } from "../components/core"
 import Seo from "../components/Seo"
 import { useSiteMetadata } from "../hooks/"
 
@@ -18,24 +16,9 @@ const IndexPage = () => {
 	const { siteTitle } = useSiteMetadata()
 
 	return (
-		<Wrapper className="px-4 py-10">
+		<>
 			<Seo title="Demo" />
-			<nav className="my-4 flex flex-row flex-nowrap justify-start items-center">
-				<a
-					className="underline font-semibold text-primary hover:text-primary-light py-1 px-2"
-					target={`_blank`}
-					href="https://github.com/crock/gatsby-starter-frontmatter-kitchen"
-				>
-					GitHub
-				</a>
-				<Link
-					className="underline font-semibold text-primary hover:text-primary-light py-1 px-2"
-					to="/blog"
-				>
-					Blog
-				</Link>
-			</nav>
-			<h1 className="font-black text-2xl mb-3">{siteTitle}</h1>
+			<h1 className="font-black text-2xl mb-3 mt-0">{siteTitle}</h1>
 			<div className="font-normal text-base leading-6">
 				<p>
 					<code>gatsby-starter-frontmatter-kitchen</code> is a Gatsby
@@ -58,7 +41,7 @@ const IndexPage = () => {
 					</li>
 				</ul>
 			</div>
-		</Wrapper>
+		</>
 	)
 }
 
