@@ -37,8 +37,12 @@ const IndexPage = () => {
 				</h3>
 				<ul className="list-disc list-inside">
 					<li>
-						Thanks to <a href="https://macarthur.me/?ref=gatsby-starter-frontmatter-kitchen" target="_blank">Alex McArhtur</a> for creating <a href="https://jamcomments.com/?ref=gatsby-starter-frontmatter-kitchen" target="_blank">a wonderful, JAMstack alternative</a> to Disqus comments.
+						Thanks to <a className="text-primary hover:text-primary-light" href="https://macarthur.me/?ref=gatsby-starter-frontmatter-kitchen" target="_blank">Alex McArthur</a> for creating <a className="text-primary hover:text-primary-light" href="https://jamcomments.com/?ref=gatsby-starter-frontmatter-kitchen" target="_blank">a wonderful, JAMstack alternative</a> to Disqus comments!
 					</li>
+					<li>
+						Thanks to the team that developed the incredible <a className="text-primary hover:text-primary-light" href="https://frontmatter.codes/?ref=gatsby-starter-frontmatter-kitchen" target="_blank">Front Matter VSCode extension</a>, which inspired this project!
+					</li>
+					<li>HUGE appreciation to the <a className="text-primary hover:text-primary-light" href="https://gatsbyjs.com/?ref=gatsby-starter-frontmatter-kitchen" target="_blank">Gatsby.js</a> core team for continuing to push the limits of static site generators with each Gatsby release!</li>
 				</ul>
 			</div>
 		</>

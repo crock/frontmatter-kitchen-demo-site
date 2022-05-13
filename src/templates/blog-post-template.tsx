@@ -25,7 +25,7 @@ export default function BlogPostTemplate({ data, pageContext }) {
 		<article>
 			<Seo
 				title={post.frontmatter.title}
-				description={post.frontmatter.description}
+				description={post.frontmatter.description || post.excerpt}
 			/>
 			<div className="py-16 overflow-hidden h-full">
 				<div className="px-4 lg:px-0 lg:container mx-auto relative">
